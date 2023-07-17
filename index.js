@@ -21,6 +21,13 @@ const run = async () => {
 
     const bookCollection = client.db('pages-of-time').collection('book');
 
+    app.get('/books', async (req, res) => {
+      const cursor = bookCollection.find({});
+      const books = await cursor.toArray();
+
+      res.send({ status: true, data: books });
+    });
+
 
   } finally {
   }
