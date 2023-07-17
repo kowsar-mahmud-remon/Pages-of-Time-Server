@@ -36,6 +36,15 @@ const run = async () => {
       res.send(result);
     });
 
+    app.get('/books/:id', async (req, res) => {
+      const id = req.params.id;
+
+      const result = await bookCollection.findOne({ _id: ObjectId(id) });
+      console.log(result);
+      res.send(result);
+    });
+
+
 
   } finally {
   }
