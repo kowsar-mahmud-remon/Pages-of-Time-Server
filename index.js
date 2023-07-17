@@ -28,6 +28,14 @@ const run = async () => {
       res.send({ status: true, data: books });
     });
 
+    app.post('/book', async (req, res) => {
+      const book = req.body;
+
+      const result = await bookCollection.insertOne(book);
+
+      res.send(result);
+    });
+
 
   } finally {
   }
