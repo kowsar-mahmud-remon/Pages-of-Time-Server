@@ -44,6 +44,22 @@ const run = async () => {
       res.send(result);
     });
 
+    app.delete('/book', async (req, res) => {
+      const { id, userEmail } = req.body;
+
+      const userBooks = await bookCollection.findOne({ _id: ObjectId(id) });
+      console.log({ userBooks });
+      console.log(userBooks.userEmail);
+
+      if (userBooks.userEmail === userEmail) {
+        const result = await bookCollection.deleteOne({ _id: ObjectId(id) });
+        console.log(result);
+        res.send(result);
+      } else {
+        return res.status(404).json({ message: 'Deleted Failed' });
+
+      }
+    });
 
 
   } finally {
